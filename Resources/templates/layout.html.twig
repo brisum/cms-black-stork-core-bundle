@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="{{ app.request.locale }}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>{% block title %}Alvarium: Science Summer Camp{% endblock %}</title>
+
+    <link rel="icon" type="image/png" href="{{ asset('/assets/core/img/favicon/favicon-16x16.png') }}?{{ ASSETS_VERSION }}" sizes="32x32" />
+    <link rel="icon" type="image/png" href="{{ asset('/assets/core/img/favicon/favicon-32x32.png') }}?{{ ASSETS_VERSION }}" sizes="16x16" />
+    <link rel="icon" type="image/svg+xml" href="{{ asset('/assets/core/img/favicon/favicon.svg') }}?{{ ASSETS_VERSION }}" sizes="any" >
+
+    <!-- Bootstrap -->
+    <link href="{{ asset('/assets/style.css') }}?{{ ASSETS_VERSION }}" rel="stylesheet">
+    <link href="{{ asset('/assets/font_awesome.css') }}?{{ ASSETS_VERSION }}" rel="stylesheet">
+    {% block stylesheets %}{% endblock %}
+</head>
+<body class="{% block body_class %}lang-{{ app.request.locale }}{% endblock %}">
+    {% block body %}
+        <div id="main-content">
+            {% block content %}
+
+            {% endblock %}
+        </div>
+    {% endblock %}
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-muted">
+                © ALVARIUM 2018
+            </p>
+        </div>
+    </footer>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="{{ asset('/assets/jquery.js') }}?{{ ASSETS_VERSION }}"></script>
+    <script src="{{ asset('/assets/bootstrap.js') }}?{{ ASSETS_VERSION }}"></script>
+    <script src="{{ asset('/assets/main.js') }}?{{ ASSETS_VERSION }}"></script>
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

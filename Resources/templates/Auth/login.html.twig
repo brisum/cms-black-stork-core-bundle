@@ -1,0 +1,80 @@
+{% extends '@StorkCoreBundle/layout.html.twig' %}
+
+{% block body_class %}{{ parent() }} user-login{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="page-header">
+            <h1 class="text-center">
+                {% trans from 'user-auth' %}title.login{% endtrans %}
+            </h1>
+        </div>
+
+
+        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="text-center">
+                You have authenticated already.
+                <a href="{{ path('_logout') }}">
+                    Logout.
+                </a>
+            </div>
+        {% else %}
+            <form class="form-signin" action="{{ path('_login_check') }}" method="post">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                <div class="form-group">
+                    {% if error %}
+                        <div class="error-message">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="form-group">
+                    <label for="inputUsername">
+                        {% trans from 'user-auth' %}label.username{% endtrans %}
+                    </label>
+                    <input type="text" id="inputUsername" class="form-control" required autofocus
+                           name="_username" value="{{ last_username }}">
+                </div>
+
+                <div class="form-group">
+                    <label for="inputPassword">
+                        {% trans from 'user-auth' %}label.password{% endtrans %}
+
+                        <a class="page-action pull-right" href="javascript:void(0)" tabindex="-1"
+                           data-require-init="forgot-password.widget">
+                            {% trans from 'user-auth' %}label.forgot_password{% endtrans %}
+                        </a>
+                    </label>
+                    <input type="password" id="inputPassword" class="form-control" required
+                           name="_password">
+                </div>
+
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" id="remember_me" name="_remember_me" checked />
+                        {% trans from 'user-auth' %}label.remember_me{% endtrans %}
+                    </label>
+                </div>
+
+                <button class="btn btn-primary btn-block" type="submit">
+                    {% trans from 'user-auth' %}button.sign_in{% endtrans %}
+                </button>
+
+                {# popup forgot password content #}
+                <div id="forgot-password-content" class="d-none">
+                    <div class="popup-title">
+                        {% trans from 'user-auth' %}popup.title.forgot_password{% endtrans %}
+                    </div>
+                    <div class="forgot-password-content">
+                        {% trans from 'user-auth' %}forgot-password-content{% endtrans %}
+                    </div>
+                    <div class="popup-footer text-center">
+                        <button type="button" class="btn btn-light" data-dismiss="modal">
+                            {% trans from 'user-auth' %}popup.button.ok{% endtrans %}
+                        </button>
+                    </div>
+                </div>
+            </form>
+        {% endif %}
+    </div>
+{% endblock %}

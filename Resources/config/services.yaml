@@ -1,0 +1,8 @@
+services:
+    stork.employee_provider.email:
+        class: Brisum\Stork\Bundle\CoreBundle\Security\UserProvider
+        arguments:
+            - '@doctrine.orm.entity_manager'
+
+    stork.security.plain_password_encoder:
+        class: Brisum\Stork\Bundle\CoreBundle\Security\Encoder\PlaintextPasswordEncoder
