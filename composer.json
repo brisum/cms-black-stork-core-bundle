@@ -1,0 +1,22 @@
+{
+  "name": "brisum/stork-core-bundle",
+  "description": "CMS Stork core bundle",
+  "keywords": [
+    "symfony",
+    "cms"
+  ],
+  "homepage": "https://github.com/brisum/stork-core-bundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Oleksandr Manchenko",
+      "email": "omanchenko@brisum.com",
+      "homepage": "http://brisum.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Brisum\\Stork\\Bundle\\CoreBundle": "src/"
+    }
+  }
+}
