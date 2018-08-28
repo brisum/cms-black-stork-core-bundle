@@ -1,0 +1,6 @@
+services:
+    stork.sonata_admin.employee:
+        class: Brisum\Stork\Bundle\CoreBundle\SonataAdmin\EmployeeAdmin
+        arguments: [~, Brisum\Stork\Bundle\CoreBundle\Entity\Employee, ~]
+        tags:
+            - {name: sonata.admin, manager_type: orm, group: 'Employee', label: 'Employees'}
