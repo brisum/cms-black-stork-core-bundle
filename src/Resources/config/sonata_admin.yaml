@@ -4,3 +4,39 @@ services:
         arguments: [~, Brisum\Stork\Bundle\CoreBundle\Entity\Employee, ~]
         tags:
             - {name: sonata.admin, manager_type: orm, group: 'Employee', label: 'Employees'}
+
+    stork.sonata_admin.page:
+        class: Brisum\Stork\Bundle\CoreBundle\SonataAdmin\Page
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Page", label: "Page" }
+        arguments:
+            - ~
+            - Brisum\Stork\Bundle\CoreBundle\Entity\Page
+            - ~
+        calls:
+            - [ inject, ['@service_container']]
+        public: true
+
+    stork.sonata_admin.page_seo_data:
+        class: Brisum\Stork\Bundle\CoreBundle\SonataAdmin\PageSeoData
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Page", label: "SeoData" }
+        arguments:
+            - ~
+            - Brisum\Stork\Bundle\CoreBundle\Entity\PageSeoData
+            - ~
+        calls:
+            - [ inject, ['@service_container']]
+        public: true
+
+    stork.sonata_admin.seo_template:
+        class: Brisum\Stork\Bundle\CoreBundle\SonataAdmin\SeoTemplate
+        tags:
+            - { name: sonata.admin, manager_type: orm, group: "Seo", label: "Seo Template" }
+        arguments:
+            - ~
+            - Brisum\Stork\Bundle\CoreBundle\Entity\SeoTemplate
+            - ~
+        calls:
+            - [setContainer, ['@service_container']]
+        public: true

@@ -12,8 +12,9 @@ class StorkCoreExtension extends Extension
     public function load(array $configs, ContainerBuilder $container) {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter('stork_core.seo.templates',  $config['seo']['templates']);
         $container->setParameter('stork_core.page.templates', $config['page']['templates']);
-        $container->setParameter('stork_core.page.statuses', $config['page']['statuses']);
+        $container->setParameter('stork_core.page.statuses',  $config['page']['statuses']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yaml');

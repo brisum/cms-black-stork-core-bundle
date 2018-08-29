@@ -6,3 +6,21 @@ services:
 
     stork.security.plain_password_encoder:
         class: Brisum\Stork\Bundle\CoreBundle\Security\Encoder\PlaintextPasswordEncoder
+
+    stork.core.listener.seo_data:
+        class: Brisum\Stork\Bundle\CoreBundle\Listener\SeoListener
+        arguments:
+        - '@doctrine.orm.entity_manager'
+        - '@twig'
+        - '%stork_core.seo.templates%'
+        tags:
+        - {name: 'kernel.event_subscriber'}
+
+    stork.core.templating.engine.twig:
+        class: Brisum\Stork\Bundle\CoreBundle\TwigBundle\TwigEngine
+        arguments:
+        - '@twig'
+        - '@templating.name_parser'
+        - '@templating.locator'
+        calls:
+        - [setContainer, ["@service_container"]]

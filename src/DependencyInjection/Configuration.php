@@ -14,6 +14,19 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
+                ->arrayNode('seo')
+                    ->children()
+                        ->arrayNode('templates')
+                            ->isRequired()
+                            ->requiresAtLeastOneElement()
+                            ->useAttributeAsKey('name')
+                            ->arrayPrototype()
+                                ->prototype('scalar')
+                                ->end()
+                            ->end()
+                        ->end() // templates
+                    ->end()
+                ->end()
                 ->arrayNode('page')
                     ->children()
                         ->arrayNode('templates')

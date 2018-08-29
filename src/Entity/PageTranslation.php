@@ -1,19 +1,19 @@
 <?php
 
-namespace Brisum\Stork\Bundle\UserBundle\Entity;
+namespace Brisum\Stork\Bundle\CoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Translatable\Entity\MappedSuperclass\AbstractPersonalTranslation;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="user_translation",
+ * @ORM\Table(name="page_translation",
  *     uniqueConstraints={@ORM\UniqueConstraint(name="lookup_unique_idx", columns={
  *         "locale", "object_id", "field"
  *     })}
  * )
  */
-class UserTranslation extends AbstractPersonalTranslation
+class PageTranslation extends AbstractPersonalTranslation
 {
     /**
      * Convenient constructor
@@ -30,7 +30,7 @@ class UserTranslation extends AbstractPersonalTranslation
     }
 
     /**
-     * @ORM\ManyToOne(targetEntity="User", inversedBy="translations")
+     * @ORM\ManyToOne(targetEntity="Page", inversedBy="translations")
      * @ORM\JoinColumn(name="object_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $object;
