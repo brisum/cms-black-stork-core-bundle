@@ -28,7 +28,7 @@ class SeoTemplate extends AbstractAdmin
 
     public function setContainer(ContainerInterface $container)
     {
-        foreach (array_keys($container->getParameter('seo.templates')) as $seoTemplate) {
+        foreach (array_keys($container->getParameter('stork_core.seo.templates')) as $seoTemplate) {
             $this->seoTemplates[$seoTemplate] = $seoTemplate;
         }
     }

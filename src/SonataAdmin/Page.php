@@ -4,11 +4,15 @@ namespace Brisum\Stork\Bundle\CoreBundle\SonataAdmin;
 
 use Brisum\Stork\Bundle\CoreBundle\Entity\Page as EntityPage;
 use Sonata\AdminBundle\Admin\AbstractAdmin;
+use Sonata\AdminBundle\Form\Type\AdminType;
 use Sonata\AdminBundle\Show\ShowMapper;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class Page extends AbstractAdmin
 {
@@ -36,11 +40,11 @@ class Page extends AbstractAdmin
      */
     public function inject(ContainerInterface $container)
     {
-        foreach (array_keys($container->getParameter('page.templates')) as $entityTemplate) {
+        foreach (array_keys($container->getParameter('stork_core.page.templates')) as $entityTemplate) {
             $this->entityTemplates[$entityTemplate] = $entityTemplate;
         }
 
-        foreach ($container->getParameter('page.statuses') as $statusValue =>  $statusTitle) {
+        foreach ($container->getParameter('stork_core.page.statuses') as $statusValue =>  $statusTitle) {
             $this->entityStatuses[$statusTitle] = $statusValue;
         }
     }
@@ -55,15 +59,15 @@ class Page extends AbstractAdmin
         $formMapper
             ->with('General')
                 ->add('name', null, ['attr' => ['readonly' => !$isEditableName]])
-                ->add('status', 'choice', ['choices' => $this->entityStatuses])
-                ->add('template', 'choice', ['choices' => $this->entityTemplates])
+                ->add('status', ChoiceType::class, ['choices' => $this->entityStatuses])
+                ->add('template', ChoiceType::class, ['choices' => $this->entityTemplates])
                 ->add('title')
-                ->add('content', 'textarea', ['attr' => ['class' => 'ckeditor', 'rows' => 15]])
+                ->add('content', TextareaType::class, ['attr' => ['class' => 'ckeditor', 'rows' => 15]])
             ->end()
             ->with('SeoData')
                 ->add(
                     'seoData',
-                    'sonata_type_admin',
+                    AdminType::class,
                     [],
                     ['edit' => 'inline']
                 )
@@ -75,7 +79,7 @@ class Page extends AbstractAdmin
                 ->with('Time')
                 ->add(
                     'created',
-                    'datetime',
+                    DateTimeType::class,
                     [
                         'attr' => [
                             'class' => 'normal',
@@ -87,7 +91,7 @@ class Page extends AbstractAdmin
                 )
                 ->add(
                     'updated',
-                    'datetime',
+                    DateTimeType::class,
                     [
                         'attr' => [
                             'class' => 'normal',
@@ -121,15 +125,5 @@ class Page extends AbstractAdmin
             ->add('status')
             ->add('updated')
         ;
-    }
-
-    // Fields to be shown on show action
-    protected function configureShowFields(ShowMapper $showMapper)
-    {
-//        $showMapper
-//            ->add('title')
-//            ->add('slug')
-//            ->add('author')
-//        ;
     }
 }

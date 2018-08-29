@@ -2,6 +2,7 @@
 
 namespace Brisum\Stork\Bundle\CoreBundle\Controller;
 
+use Brisum\Stork\Bundle\CoreBundle\Entity\Page;
 use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -16,17 +17,17 @@ class PageController extends Controller
      */
     public function indexAction(Request $request, $name)
     {
-//        /** @var EntityManager $em */
-//        $em = $this->getDoctrine()->getManager();
-//        /** @var Page $entity */
-//        $entity = $em->getRepository('StorkPageBundle:Page')->findOneByName($name);
+        /** @var EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+        /** @var Page $entity */
+        $entity = $em->getRepository(Page::class)->findOneByName($name);
         $templates = $this->getParameter('stork_core.page.templates');
-//
-//        if (!$entity || Page::STATUS_PUBLISH != $entity->getStatus()) {
-//            throw $this->createNotFoundException();
-//        }
-//
-        $template = 'home'; // $entity->getTemplate();
+
+        if (!$entity || Page::STATUS_PUBLISH != $entity->getStatus()) {
+            throw $this->createNotFoundException();
+        }
+
+        $template = $entity->getTemplate();
         if (!array_key_exists($template, $templates)) {
             throw $this->createNotFoundException("Not Found Template \"{$template}\"");
         }
@@ -34,7 +35,7 @@ class PageController extends Controller
         return $this->render(
             $templates[$template],
             [
-                //'entity' => $entity
+                'entity' => $entity
             ]
         );
     }
