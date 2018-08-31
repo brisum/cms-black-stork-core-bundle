@@ -2,6 +2,7 @@
 
 namespace Brisum\Stork\Bundle\CoreBundle\SonataAdmin;
 
+use Brisum\Stork\Bundle\CoreBundle\Entity\Employee;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\QueryBuilder;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -14,6 +15,7 @@ use Sonata\AdminBundle\Route\RouteCollection;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class EmployeeAdmin extends AbstractAdmin
 {
@@ -110,7 +112,7 @@ class EmployeeAdmin extends AbstractAdmin
             ->add('firstName')
             ->add('lastName')
             ->add('email')
-            // ->add('plainPassword', TextType::class, ['required' => false])
+             ->add('plainPassword', TextType::class, ['required' => false, 'mapped' => false])
             ->add(
                 'roles',
                 ChoiceType::class,
@@ -124,22 +126,27 @@ class EmployeeAdmin extends AbstractAdmin
         ->end();
     }
 
-//    /**
-//     * @param Employee $entity
-//     */
-//    public function prePersist($entity)
-//    {
-//        $this->preUpdate($entity);
-//    }
-//
-//    /**
-//     * @param Employee $entity
-//     */
-//    public function preUpdate($entity)
-//    {
-//        /** @var UserManagerInterface $userManager */
-//        $userManager = $this->getConfigurationPool()->getContainer()->get('fos_user.user_manager');
-//        $userManager->updateCanonicalFields($entity);
-//        $userManager->updatePassword($entity);
-//    }
+    /**
+     * @param Employee $entity
+     */
+    public function prePersist($entity)
+    {
+        $this->preUpdate($entity);
+    }
+
+    /**
+     * @param Employee $entity
+     */
+    public function preUpdate($entity)
+    {
+        /** @var UserPasswordEncoderInterface $userPasswordEncoder */
+        $userPasswordEncoder = $this->getConfigurationPool()->getContainer()->get('security.password_encoder');
+        $request = $this->getRequest();
+        $uniqid = $request->query->get('uniqid');
+        $plainPassword = $this->getRequest()->request->get($uniqid)['plainPassword'];
+
+        if ($plainPassword) {
+            $entity->setPassword($userPasswordEncoder->encodePassword($entity, $plainPassword));
+        }
+    }
 }
