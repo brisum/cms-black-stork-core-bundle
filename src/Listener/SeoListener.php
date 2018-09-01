@@ -94,7 +94,7 @@ class SeoListener implements EventSubscriberInterface
         }
 
         /** @var SeoTemplate $seoTemplate */
-        $seoTemplate = $this->entityManager->getRepository('BSMSeoBundle:SeoTemplate')
+        $seoTemplate = $this->entityManager->getRepository(SeoTemplate::class)
             ->findOneBy(['template' => $this->routes[$route]]);
         if ($seoTemplate) {
             null === $seoData['title']           && $seoData['title'] = $seoTemplate->getTitle();
@@ -128,6 +128,9 @@ class SeoListener implements EventSubscriberInterface
      * @param array $seoData
      * @param array $parameters
      * @return array
+     * @throws \Throwable
+     * @throws \Twig_Error_Loader
+     * @throws \Twig_Error_Syntax
      */
     protected function templating(array $seoData, array $parameters)
     {

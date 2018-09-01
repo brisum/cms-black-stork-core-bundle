@@ -1,4 +1,13 @@
 services:
+    templating.engine.twig:
+        class: Brisum\Stork\Bundle\CoreBundle\TwigBundle\TwigEngine
+        arguments:
+            - '@twig'
+            - '@templating.name_parser'
+            - '@templating.locator'
+        calls:
+            - [setContainer, ["@service_container"]]
+
     stork.employee_provider.email:
         class: Brisum\Stork\Bundle\CoreBundle\Security\UserProvider
         arguments:
@@ -10,17 +19,8 @@ services:
     stork.core.listener.seo_data:
         class: Brisum\Stork\Bundle\CoreBundle\Listener\SeoListener
         arguments:
-        - '@doctrine.orm.entity_manager'
-        - '@twig'
-        - '%stork_core.seo.templates%'
+            - '@doctrine.orm.entity_manager'
+            - '@twig'
+            - '%stork_core.seo.templates%'
         tags:
-        - {name: 'kernel.event_subscriber'}
-
-    stork.core.templating.engine.twig:
-        class: Brisum\Stork\Bundle\CoreBundle\TwigBundle\TwigEngine
-        arguments:
-        - '@twig'
-        - '@templating.name_parser'
-        - '@templating.locator'
-        calls:
-        - [setContainer, ["@service_container"]]
+            - {name: 'kernel.event_subscriber'}

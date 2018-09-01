@@ -16,11 +16,21 @@ class TwigEngine extends BaseTwigEngine implements ContainerAwareInterface
      */
     protected $container;
 
+    public function render($view, array $parameters = array())
+    {
+        $event = new PreRenderEvent($view, $parameters, null, $this->getRequest());
+
+        $this->getEventDispatcher()->dispatch(TwigEngineEvents::PRE_RENDER, $event);
+
+        return parent::render($event->getView(), $event->getParameters());
+    }
+
     /**
      * @param string $view
      * @param array $parameters
      * @param Response|null $response
      * @return Response
+     * @throws \Twig\Error\Error
      */
     public function renderResponse($view, array $parameters = array(), Response $response = null)
     {

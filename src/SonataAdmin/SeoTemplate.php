@@ -9,6 +9,9 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Brisum\Stork\Bundle\CoreBundle\Entity\SeoTemplate as EntitySeoTemplate;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class SeoTemplate extends AbstractAdmin
 {
@@ -41,13 +44,13 @@ class SeoTemplate extends AbstractAdmin
 
         $formMapper
             ->with('General')
-                ->add('template', 'choice', ['choices' => $this->seoTemplates])
+                ->add('template', ChoiceType::class, ['choices' => $this->seoTemplates])
                 ->add('title')
-                ->add('meta_description', 'textarea', ['required' => false, 'attr' => ['rows' => 7]])
-                ->add('meta_keywords', 'textarea', ['required' => false, 'attr' => ['rows' => 7]])
+                ->add('meta_description', TextareaType::class, ['required' => false, 'attr' => ['rows' => 7]])
+                ->add('meta_keywords', TextareaType::class, ['required' => false, 'attr' => ['rows' => 7]])
                 ->add('breadcrumbs')
                 ->add('h1')
-                ->add('content', 'textarea', ['required' => false, 'attr' => ['rows' => 7]])
+                ->add('content', TextareaType::class, ['required' => false, 'attr' => ['rows' => 7]])
             ->end()
         ;
 
@@ -56,7 +59,7 @@ class SeoTemplate extends AbstractAdmin
                 ->with('Time')
                     ->add(
                         'created',
-                        'datetime',
+                        DateTimeType::class,
                         [
                             'attr' => [
                                 'class' => 'normal',
@@ -68,7 +71,7 @@ class SeoTemplate extends AbstractAdmin
                     )
                     ->add(
                         'updated',
-                        'datetime',
+                        DateTimeType::class,
                         [
                             'attr' => [
                                 'class' => 'normal',

@@ -12,8 +12,8 @@ use Symfony\Component\HttpFoundation\Request;
 class PageController extends Controller
 {
     /**
-     * @Route("/", defaults={"name" = "home"}, name="stork_page_home")
-     * @Route("/{name}", defaults={"name" = "home"}, name="stork_page")
+     * @Route("/", defaults={"name" = "home"}, name="page_home")
+     * @Route("/{name}", defaults={"name" = "home"}, name="page")
      */
     public function indexAction(Request $request, $name)
     {
