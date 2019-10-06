@@ -1,2 +1,2 @@
-# CMS Stork core bundle
+# CMS Back Stork - Core bundle
 

@@ -1,0 +1,10 @@
+login:
+  title: Вход
+  username:
+    label: Email
+  password:
+    label: Пароль
+  remember_me:
+    label: Запомнить меня
+  sign_in:
+    button: Войти

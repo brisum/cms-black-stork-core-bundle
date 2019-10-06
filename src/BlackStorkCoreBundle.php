@@ -1,10 +1,10 @@
 <?php
 
-namespace Brisum\Stork\Bundle\CoreBundle;
+namespace BlackStork\Core;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class StorkCoreBundle extends Bundle
+class BlackStorkCoreBundle extends Bundle
 {
     /**
      * Returns the bundle name that this bundle overrides.

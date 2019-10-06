@@ -1,6 +1,6 @@
 <?php
 
-namespace Brisum\Stork\Bundle\CoreBundle\Repository;
+namespace BlackStork\Core\Repository;
 
 use Doctrine\ORM\EntityRepository;
 

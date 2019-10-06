@@ -1,6 +1,6 @@
 <?php
 
-namespace Brisum\Stork\Bundle\CoreBundle\Entity;
+namespace BlackStork\Core\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *          @ORM\UniqueConstraint(name="email", columns={"email"})
  *      }
  * )
- * @ORM\Entity(repositoryClass="Brisum\Stork\Bundle\CoreBundle\Repository\EmployeeRepository")
+ * @ORM\Entity(repositoryClass="BlackStork\Core\Repository\EmployeeRepository")
  */
 class Employee implements UserInterface
 {
@@ -46,7 +46,7 @@ class Employee implements UserInterface
     /**
      * @var string
      *
-     * @ORM\Column(name="email", type="string", length=255, nullable=false)
+     * @ORM\Column(name="email", type="string", length=150, nullable=false)
      */
     private $email;
 

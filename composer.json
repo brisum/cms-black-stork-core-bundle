@@ -1,11 +1,11 @@
 {
-  "name": "brisum/stork-core-bundle",
-  "description": "CMS Stork core bundle",
+  "name": "cms-black-stork/core",
+  "description": "CMS Black Stork - Core bundle",
   "keywords": [
     "symfony",
     "cms"
   ],
-  "homepage": "https://github.com/brisum/stork-core-bundle",
+  "homepage": "https://github.com/brisum/cms-black-stork-core-bundle",
   "license": "MIT",
   "authors": [
     {
@@ -16,7 +16,7 @@
   ],
   "autoload": {
     "psr-4": {
-      "Brisum\\Stork\\Bundle\\CoreBundle": "src/"
+      "BlackStork\\Core\\": "src/"
     }
   }
 }

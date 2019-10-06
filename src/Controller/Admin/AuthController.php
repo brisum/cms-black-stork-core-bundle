@@ -1,6 +1,6 @@
 <?php
 
-namespace Brisum\Stork\Bundle\CoreBundle\Controller\Admin;
+namespace BlackStork\Core\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -28,7 +28,7 @@ class AuthController extends AbstractController
         $lastUsername = $authUtils->getLastUsername();
 
         return $this->render(
-            '@StorkCoreBundle/Auth/login.html.twig',
+            '@BlackStorkCoreBundle/Auth/login.html.twig',
             [
                 'last_username' => $lastUsername,
                 'error'         => $error,

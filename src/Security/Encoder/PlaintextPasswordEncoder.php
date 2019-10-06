@@ -1,6 +1,6 @@
 <?php
 
-namespace Brisum\Stork\Bundle\CoreBundle\Security\Encoder;
+namespace BlackStork\Core\Security\Encoder;
 
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;

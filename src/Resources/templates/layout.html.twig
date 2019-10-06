@@ -5,13 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{% block title %}Alvarium: Science Summer Camp{% endblock %}</title>
+    <title>{% block title %}{% endblock %}</title>
 
     <link rel="icon" type="image/png" href="{{ asset('/assets/core/img/favicon/favicon-16x16.png') }}?{{ ASSETS_VERSION }}" sizes="32x32" />
     <link rel="icon" type="image/png" href="{{ asset('/assets/core/img/favicon/favicon-32x32.png') }}?{{ ASSETS_VERSION }}" sizes="16x16" />
     <link rel="icon" type="image/svg+xml" href="{{ asset('/assets/core/img/favicon/favicon.svg') }}?{{ ASSETS_VERSION }}" sizes="any" >
 
     <!-- Bootstrap -->
+    <link href="{{ asset('/assets/bootstrap.css') }}?{{ ASSETS_VERSION }}" rel="stylesheet">
     <link href="{{ asset('/assets/style.css') }}?{{ ASSETS_VERSION }}" rel="stylesheet">
     <link href="{{ asset('/assets/font_awesome.css') }}?{{ ASSETS_VERSION }}" rel="stylesheet">
     {% block stylesheets %}{% endblock %}
@@ -27,8 +28,8 @@
 
     <footer class="footer">
         <div class="container">
-            <p class="text-muted">
-                © ALVARIUM 2018
+            <p class="text-muted text-center">
+                © {{ 'now'|date('Y') }}
             </p>
         </div>
     </footer>

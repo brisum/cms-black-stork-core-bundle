@@ -1,0 +1,8 @@
+services:
+  black_stork_core.command.employee_create:
+    public: true
+    class: BlackStork\Core\Command\EmployeeCreate
+    calls:
+      - ['inject', ['@security.password_encoder', '@doctrine.orm.entity_manager']]
+    tags:
+      -  { name: console.command }

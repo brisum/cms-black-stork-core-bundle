@@ -1,9 +1,9 @@
-stork_admin:
-    resource: "@StorkCoreBundle/Controller/Admin/"
+black_stork_admin:
+    resource: "@BlackStorkCoreBundle/Controller/Admin/"
     type:     annotation
     prefix:   /%strok_admin_area%
 
-stork_page:
-    resource: "@StorkCoreBundle/Controller/PageController.php"
+black_stork_page:
+    resource: "@BlackStorkCoreBundle/Controller/PageController.php"
     type:     annotation
     prefix:   /

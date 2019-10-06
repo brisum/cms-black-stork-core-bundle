@@ -1,0 +1,10 @@
+login:
+  title: Login
+  username:
+    label: Email
+  password:
+    label: Password
+  remember_me:
+    label: Remember me
+  sign_in:
+    button: Sign in

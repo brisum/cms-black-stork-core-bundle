@@ -1,9 +1,9 @@
 <?php
 
-namespace Brisum\Stork\Bundle\CoreBundle\Security;
+namespace BlackStork\Core\Security;
 
-use Brisum\Stork\Bundle\CoreBundle\Entity\Employee;
-use Brisum\Stork\Bundle\CoreBundle\Repository\EmployeeRepository;
+use BlackStork\Core\Entity\Employee;
+use BlackStork\Core\Repository\EmployeeRepository;
 use Doctrine\ORM\EntityManager;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserProviderInterface;

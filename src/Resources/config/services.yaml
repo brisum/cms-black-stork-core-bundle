@@ -1,8 +1,26 @@
 services:
-    stork.employee_provider.email:
-        class: Brisum\Stork\Bundle\CoreBundle\Security\UserProvider
+    templating.engine.twig:
+        class: BlackStork\Core\TwigBundle\TwigEngine
+        arguments:
+            - '@twig'
+            - '@templating.name_parser'
+            - '@templating.locator'
+        calls:
+            - [setContainer, ["@service_container"]]
+
+    black_stork.employee_provider.email:
+        class: BlackStork\Core\Security\UserProvider
         arguments:
             - '@doctrine.orm.entity_manager'
 
-    stork.security.plain_password_encoder:
-        class: Brisum\Stork\Bundle\CoreBundle\Security\Encoder\PlaintextPasswordEncoder
+    black_stork.security.plain_password_encoder:
+        class: BlackStork\Core\Security\Encoder\PlaintextPasswordEncoder
+
+    black_stork.core.listener.seo_data:
+        class: BlackStork\Core\Listener\SeoListener
+        arguments:
+            - '@doctrine.orm.entity_manager'
+            - '@twig'
+            - '%black_stork_core.seo.templates%'
+        tags:
+            - {name: 'kernel.event_subscriber'}
